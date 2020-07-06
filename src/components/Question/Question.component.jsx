@@ -18,10 +18,12 @@ const QuestionWrapper = styled.div`
 	border-radius: 20px;
 	margin: 20px;
 	margin-bottom: 50px;
+
 	p {
 		word-break: break-word;
 		font-size: 18px;
-		background-color: #e9ebee;
+		color: #fff;
+		background-color: #1b1b1b;
 		padding: 15px;
 		border-radius: 15px;
 	}
@@ -33,6 +35,9 @@ const QuestionWrapper = styled.div`
 `;
 
 const QuestionComponent = ({ questions }) => {
+
+	const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+
 	return (
 		<div>
 			{questions.map((item, index) => {
@@ -43,7 +48,7 @@ const QuestionComponent = ({ questions }) => {
 					incorrect_answers,
 				} = item;
 				return (
-					<QuestionWrapper key={index}>
+					<QuestionWrapper style={{border: `2px solid ${colors[Math.floor(Math.random() * colors.length)]}`}} key={index}>
 						<h3>{category}</h3>
 						<p>{he.unescape(question)}</p>
 						<Choices

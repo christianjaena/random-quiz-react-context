@@ -34,7 +34,7 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 		setChoices(_.shuffle(answers));
 	}, []);
 
-	const pickAnswer = answer => {
+	const pickAnswer = (answer, index) => {
 		setAnswersShown(true);
 		if (answer === correctAnswer) {
 			addScore();
@@ -48,7 +48,6 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 	return (
 		<div>
 			{choices.map((item, idx) => {
-				console.log(item)
 				return (
 					<ChoicesWrapper
 						key={idx}
