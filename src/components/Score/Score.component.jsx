@@ -7,12 +7,14 @@ const ScoreWrapper = styled.div`
 	background-color: #fff;
 	padding: 20px 0;
 	margin-bottom: 20px;
+	border: 2px solid black;
 `;
 
 const Score = ({ score }) => {
 	return (
 		<ScoreWrapper>
 			<h1>Score: {score} out of 10</h1>
+			<p>Refresh to answer new questions!</p>
 		</ScoreWrapper>
 	);
 };
