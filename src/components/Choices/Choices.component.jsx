@@ -9,12 +9,12 @@ const ChoicesWrapper = styled.div`
 	width: auto;
 	padding: 20px 40px;
 	margin: 10px;
-	
 	border-radius: 15px;
 	cursor: pointer;
 
 	&:hover {
-		font-weight: bold;
+		background-color: #e9ebee;
+		font-weight: bold;	
 		transition: 0.2ms ease-in-out
 	}
 `
