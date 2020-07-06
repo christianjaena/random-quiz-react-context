@@ -14,6 +14,7 @@ const Score = ({ score }) => {
 	return (
 		<ScoreWrapper>
 			<h1>Score: {score} out of 10</h1>
+			<p>Refresh to answer new questions!</p>
 		</ScoreWrapper>
 	);
 };
