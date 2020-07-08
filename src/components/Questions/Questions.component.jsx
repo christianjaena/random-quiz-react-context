@@ -4,15 +4,22 @@ import Score from '../Score/Score.component';
 import ScoreContext from '../../context/ScoreContext';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
+import PercentContext from '../../context/PercentContext';
 
 const LoaderWrapper = styled(Loader)`
-	margin-top:300px; 
+	margin-top: 300px;
 `;
 
 const QuestionsComponent = () => {
 	const [questions, setQuestions] = useState([]);
 	const [score, setScore] = useState(0);
+
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [percent, setPercent] = useState(0);
+
+	const addPercent = () => {
+		setPercent(percent + 10);
+	};
 
 	const addScore = () => {
 		setScore(score + 1);
@@ -33,19 +40,24 @@ const QuestionsComponent = () => {
 
 	return isLoaded ? (
 		<div>
-			<ScoreContext.Provider value={addScore}>
-				<Question questions={questions} />
-			</ScoreContext.Provider>
-			<Score score={score} fetchQuestionsOnLoad={fetchQuestionsOnLoad} />
+			<PercentContext.Provider value={{percent: percent, addPercent: addPercent}}>
+				<ScoreContext.Provider value={addScore}>
+					<Question questions={questions} />
+				</ScoreContext.Provider>
+				<Score
+					score={score}
+					fetchQuestionsOnLoad={fetchQuestionsOnLoad}
+				/>
+			</PercentContext.Provider>
 		</div>
 	) : (
-			<LoaderWrapper
-				type='Grid'
-				color='#00BFFF'
-				height={100}
-				width={100}
-				timeout={3000}
-			/>
+		<LoaderWrapper
+			type='Grid'
+			color='#00BFFF'
+			height={100}
+			width={100}
+			timeout={3000}
+		/>
 	);
 };
 export default QuestionsComponent;

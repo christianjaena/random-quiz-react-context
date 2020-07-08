@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import PercentContext from '../../context/PercentContext'
+
 
 const ScoreWrapper = styled.div`
 	text-align: center;
@@ -21,8 +23,11 @@ const StyledButton = styled.button`
 	font-family: Dank Mono;
 	font-size: 15px;
 	border-radius: 15px;
-`
+`;
 const Score = ({ score, fetchQuestionsOnLoad }) => {
+	const percent = useContext(PercentContext);
+
+
 	return (
 		<ScoreWrapper>
 			<h1>Score: {score} out of 10</h1>
@@ -31,6 +36,7 @@ const Score = ({ score, fetchQuestionsOnLoad }) => {
 					fetchQuestionsOnLoad();
 					window.location.reload();
 				}}
+				style={(percent.percent === 100) ? {display: ''} : {display: 'none'}}
 			>
 				Try Again
 			</StyledButton>

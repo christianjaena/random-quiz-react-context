@@ -24,6 +24,7 @@ const ChoicesWrapper = styled.div`
 const ChoicesComponent = ({ correctAnswer, answers }) => {
 	const [isAnswersShown, setAnswersShown] = useState(false);
 	const [choices, setChoices] = useState([]);
+
 	const percent = useContext(PercentContext);
 
 	const addScore = useContext(ScoreContext);

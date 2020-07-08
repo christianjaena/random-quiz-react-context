@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Choices from '../Choices/Choices.component';
 import he from 'he';
 import styled from 'styled-components';
@@ -50,14 +50,8 @@ const StyledParticles = styled(Particles)`
 	height: 100%;
 `;
 
-
 const QuestionComponent = ({ questions }) => {
-	const [percent, setPercent] = useState(0);
-
-	const addPercent = () => {
-		setPercent(percent + 10);
-	};
-
+	const percent = useContext(PercentContext);
 	const colors = [
 		'red',
 		'orange',
@@ -70,7 +64,11 @@ const QuestionComponent = ({ questions }) => {
 
 	return (
 		<div>
-			<ProgressBar percent={percent} strokeWidth='2' strokeColor='#00BFFF' />
+			<ProgressBar
+				percent={percent.percent}
+				strokeWidth='2'
+				strokeColor='#00BFFF'
+			/>
 			{questions.map((item, index) => {
 				const {
 					category,
@@ -101,16 +99,12 @@ const QuestionComponent = ({ questions }) => {
 								},
 							}}
 						/>
-						<PercentContext.Provider
-							value={{ percent: percent, addPercent: addPercent }}
-						>
-							<Choices
-								correctAnswer={correct_answer}
-								wrongAnswers={incorrect_answers}
-								answers={[correct_answer, ...incorrect_answers]}
-								index={index}
-							/>
-						</PercentContext.Provider>
+						<Choices
+							correctAnswer={correct_answer}
+							wrongAnswers={incorrect_answers}
+							answers={[correct_answer, ...incorrect_answers]}
+							index={index}
+						/>
 					</QuestionWrapper>
 				);
 			})}
