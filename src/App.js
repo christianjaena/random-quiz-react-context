@@ -21,6 +21,7 @@ const App = () => {
 			/>
 			<Switch>
 				<Route exact path='/' component={Questions} />
+				<Route exact path='/react-quiz' component={Questions} />
 				<Route exact path='/YEYMILKTEAA' component={Milktea} />
 			</Switch>
 		</div>
