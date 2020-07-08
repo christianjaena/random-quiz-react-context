@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import styled from 'styled-components';
-
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const AppWrapper = styled.div`
 	display: flex;
@@ -13,8 +13,10 @@ const AppWrapper = styled.div`
 `;
 
 ReactDOM.render(
-	<AppWrapper>
-		<App />
-	</AppWrapper>,
+	<Router>
+		<AppWrapper>
+			<App />
+		</AppWrapper>
+	</Router>,
 	document.getElementById('root')
 );
