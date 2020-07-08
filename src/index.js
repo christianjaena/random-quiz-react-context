@@ -8,7 +8,6 @@ const AppWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	font-family: Dank Mono;
-	
 `;
 
 ReactDOM.render(

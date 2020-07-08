@@ -10,11 +10,30 @@ const ScoreWrapper = styled.div`
 	border: 2px solid black;
 `;
 
-const Score = ({ score }) => {
+const StyledButton = styled.button`
+	height: 50px;
+	width: 100px;
+	outline: none;
+	border: none;
+	background-color: #1b1b1b;
+	color: white;
+	padding: 10px;
+	font-family: Dank Mono;
+	font-size: 15px;
+	border-radius: 15px;
+`
+const Score = ({ score, fetchQuestionsOnLoad }) => {
 	return (
 		<ScoreWrapper>
 			<h1>Score: {score} out of 10</h1>
-			<p>Refresh to answer new questions!</p>
+			<StyledButton
+				onClick={() => {
+					fetchQuestionsOnLoad();
+					window.location.reload();
+				}}
+			>
+				Try Again
+			</StyledButton>
 		</ScoreWrapper>
 	);
 };

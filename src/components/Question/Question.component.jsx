@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Choices from '../Choices/Choices.component';
 import he from 'he';
 import styled from 'styled-components';
+import { Line } from 'rc-progress';
+import PercentContext from '../../context/PercentContext';
 
 const QuestionWrapper = styled.div`
 	display: flex;
@@ -34,12 +36,32 @@ const QuestionWrapper = styled.div`
 	}
 `;
 
-const QuestionComponent = ({ questions }) => {
+const ProgressBar = styled(Line)`
+	position: sticky;
+	top: 0;
+	width: 100%;
+`;
 
-	const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+const QuestionComponent = ({ questions }) => {
+	const [percent, setPercent] = useState(0);
+
+	const addPercent = () => {
+		setPercent(percent + 10);
+	};
+
+	const colors = [
+		'red',
+		'orange',
+		'yellow',
+		'green',
+		'blue',
+		'indigo',
+		'violet',
+	];
 
 	return (
 		<div>
+			<ProgressBar percent={percent} strokeWidth='2' strokeColor='#00BFFF' />
 			{questions.map((item, index) => {
 				const {
 					category,
@@ -48,15 +70,26 @@ const QuestionComponent = ({ questions }) => {
 					incorrect_answers,
 				} = item;
 				return (
-					<QuestionWrapper style={{border: `2px solid ${colors[Math.floor(Math.random() * colors.length)]}`}} key={index}>
+					<QuestionWrapper
+						style={{
+							border: `2px solid ${
+								colors[Math.floor(Math.random() * colors.length)]
+							}`,
+						}}
+						key={index}
+					>
 						<h3>{category}</h3>
 						<p>{he.unescape(question)}</p>
-						<Choices
-							correctAnswer={correct_answer}
-							wrongAnswers={incorrect_answers}
-							answers={[correct_answer, ...incorrect_answers]}
-							index={index}
-						/>
+						<PercentContext.Provider
+							value={{ percent: percent, addPercent: addPercent }}
+						>
+							<Choices
+								correctAnswer={correct_answer}
+								wrongAnswers={incorrect_answers}
+								answers={[correct_answer, ...incorrect_answers]}
+								index={index}
+							/>
+						</PercentContext.Provider>
 					</QuestionWrapper>
 				);
 			})}

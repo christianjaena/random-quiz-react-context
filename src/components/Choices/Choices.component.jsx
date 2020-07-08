@@ -3,6 +3,7 @@ import ScoreContext from '../../context/ScoreContext';
 import _ from 'lodash';
 import he from 'he';
 import styled from 'styled-components';
+import PercentContext from '../../context/PercentContext';
 
 const ChoicesWrapper = styled.div`
 	border: 1px solid #444;
@@ -21,6 +22,7 @@ const ChoicesWrapper = styled.div`
 const ChoicesComponent = ({ correctAnswer, answers }) => {
 	const [isAnswersShown, setAnswersShown] = useState(false);
 	const [choices, setChoices] = useState([]);
+	const percent = useContext(PercentContext);
 
 	const addScore = useContext(ScoreContext);
 	const mapNumsToLetters = {
@@ -36,6 +38,7 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 
 	const pickAnswer = (answer, index) => {
 		setAnswersShown(true);
+		percent.addPercent();
 		if (answer === correctAnswer) {
 			addScore();
 			correctAnswerSoundEffect();
