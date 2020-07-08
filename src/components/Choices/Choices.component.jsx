@@ -1,33 +1,23 @@
 import React, { useState, useContext, useEffect } from 'react';
+
+// Styled Components Imports
+import ChoicesWrapper from '../../styled-components/ChoicesWrapper.styledcomponent';
+
+// Context Imports
 import ScoreContext from '../../context/ScoreContext';
-import _ from 'lodash';
-import he from 'he';
-import styled from 'styled-components';
 import PercentContext from '../../context/PercentContext';
 
-const ChoicesWrapper = styled.div`
-	border: 1px solid #444;
-	width: auto;
-	padding: 20px 40px;
-	margin: 10px;
-	border-radius: 15px;
-	cursor: pointer;
-	color: #fff;
-	background-color: #202E3A;
-	&:hover {
-		background-color: #e9ebee;
-		color: #222;
-		font-weight: bold;
-		transition: 0.2ms ease-in-out;
-	}
-`;
+// Utility Imports
+import _ from 'lodash';
+import he from 'he';
+
 const ChoicesComponent = ({ correctAnswer, answers }) => {
 	const [isAnswersShown, setAnswersShown] = useState(false);
 	const [choices, setChoices] = useState([]);
 
 	const percent = useContext(PercentContext);
+	const score = useContext(ScoreContext);
 
-	const addScore = useContext(ScoreContext);
 	const mapNumsToLetters = {
 		1: 'a',
 		2: 'b',
@@ -43,7 +33,7 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 		setAnswersShown(true);
 		percent.addPercent();
 		if (answer === correctAnswer) {
-			addScore();
+			score.addScore();
 			correctAnswerSoundEffect();
 		} else {
 			wrongAnswerSoundEffect();

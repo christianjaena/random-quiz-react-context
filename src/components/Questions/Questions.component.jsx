@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
+
+// Component Imports
 import Question from '../Question/Question.component';
 import Score from '../Score/Score.component';
-import ScoreContext from '../../context/ScoreContext';
-import Loader from 'react-loader-spinner';
-import styled from 'styled-components';
-import PercentContext from '../../context/PercentContext';
 
-const LoaderWrapper = styled(Loader)`
-	margin-top: 300px;
-`;
+// Styled Components Imports
+import LoaderWrapper from '../../styled-components/LoaderWrapper.styledcomponent';
+
+// Context Imports
+import ScoreContext from '../../context/ScoreContext';
+import PercentContext from '../../context/PercentContext';
 
 const QuestionsComponent = () => {
 	const [questions, setQuestions] = useState([]);
-	const [score, setScore] = useState(0);
-
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [score, setScore] = useState(0);
 	const [percent, setPercent] = useState(0);
 
 	const addPercent = () => {
@@ -40,14 +40,11 @@ const QuestionsComponent = () => {
 
 	return isLoaded ? (
 		<div>
-			<PercentContext.Provider value={{percent: percent, addPercent: addPercent}}>
-				<ScoreContext.Provider value={addScore}>
+			<PercentContext.Provider value={{ percent, addPercent }}>
+				<ScoreContext.Provider value={{ score, addScore }}>
 					<Question questions={questions} />
+					<Score fetchQuestionsOnLoad={fetchQuestionsOnLoad} />
 				</ScoreContext.Provider>
-				<Score
-					score={score}
-					fetchQuestionsOnLoad={fetchQuestionsOnLoad}
-				/>
 			</PercentContext.Provider>
 		</div>
 	) : (

@@ -1,5 +1,9 @@
 import { createContext } from 'react';
 
-const ScoreContext = createContext({addScore: () => {}});
+const ScoreContext = createContext({
+	score: 0,
+	addScore: () => { }
+});
+
 
 export default ScoreContext;
