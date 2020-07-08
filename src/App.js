@@ -20,9 +20,8 @@ const App = () => {
 				src='https://freesound.org/people/JapanYoshiTheGamer/sounds/361263/download/361263__japanyoshithegamer__8-bit-correct-answer.wav'
 			/>
 			<Switch>
-				<Route exact path='/' component={Questions} />
 				<Route exact path='/react-quiz' component={Questions} />
-				<Route exact path='/YEYMILKTEAA' component={Milktea} />
+				<Route exact path='/react-quiz/YEYMILKTEAA' component={Milktea} />
 			</Switch>
 		</div>
 	);
