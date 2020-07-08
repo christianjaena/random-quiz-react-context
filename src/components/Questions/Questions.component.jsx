@@ -40,7 +40,7 @@ const QuestionsComponent = () => {
 		</div>
 	) : (
 			<LoaderWrapper
-				type='Puff'
+				type='Grid'
 				color='#00BFFF'
 				height={100}
 				width={100}

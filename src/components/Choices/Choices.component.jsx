@@ -12,9 +12,11 @@ const ChoicesWrapper = styled.div`
 	margin: 10px;
 	border-radius: 15px;
 	cursor: pointer;
-
+	color: #fff;
+	background-color: #202E3A;
 	&:hover {
 		background-color: #e9ebee;
+		color: #222;
 		font-weight: bold;
 		transition: 0.2ms ease-in-out;
 	}

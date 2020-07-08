@@ -4,6 +4,7 @@ import he from 'he';
 import styled from 'styled-components';
 import { Line } from 'rc-progress';
 import PercentContext from '../../context/PercentContext';
+import Particles from 'react-particles-js';
 
 const QuestionWrapper = styled.div`
 	display: flex;
@@ -11,8 +12,7 @@ const QuestionWrapper = styled.div`
 	justify-content: center;
 	text-align: center;
 	flex-direction: column;
-	background-color: #fff;
-
+	background-color: #253341;
 	-webkit-box-shadow: 10px 10px 35px -16px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 10px 10px 35px -16px rgba(0, 0, 0, 0.75);
 	box-shadow: 10px 10px 35px -16px rgba(0, 0, 0, 0.75);
@@ -33,6 +33,7 @@ const QuestionWrapper = styled.div`
 	h3 {
 		margin: 0;
 		padding: 0;
+		color: #fff;
 	}
 `;
 
@@ -41,6 +42,14 @@ const ProgressBar = styled(Line)`
 	top: 0;
 	width: 100%;
 `;
+
+const StyledParticles = styled(Particles)`
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+`;
+
 
 const QuestionComponent = ({ questions }) => {
 	const [percent, setPercent] = useState(0);
@@ -78,8 +87,20 @@ const QuestionComponent = ({ questions }) => {
 						}}
 						key={index}
 					>
-						<h3>{category}</h3>
+						<h3>{category.toUpperCase()}</h3>
 						<p>{he.unescape(question)}</p>
+						<StyledParticles
+							params={{
+								particles: {
+									number: {
+										value: 25,
+									},
+									size: {
+										value: 3,
+									},
+								},
+							}}
+						/>
 						<PercentContext.Provider
 							value={{ percent: percent, addPercent: addPercent }}
 						>
