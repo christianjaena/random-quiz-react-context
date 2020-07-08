@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import ScoreContext from '../../context/ScoreContext';
 import _ from 'lodash';
 import he from 'he';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const ChoicesWrapper = styled.div`
 	border: 1px solid #444;
@@ -14,10 +14,10 @@ const ChoicesWrapper = styled.div`
 
 	&:hover {
 		background-color: #e9ebee;
-		font-weight: bold;	
-		transition: 0.2ms ease-in-out
+		font-weight: bold;
+		transition: 0.2ms ease-in-out;
 	}
-`
+`;
 const ChoicesComponent = ({ correctAnswer, answers }) => {
 	const [isAnswersShown, setAnswersShown] = useState(false);
 	const [choices, setChoices] = useState([]);
@@ -38,11 +38,24 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 		setAnswersShown(true);
 		if (answer === correctAnswer) {
 			addScore();
+			correctAnswerSoundEffect();
+		} else {
+			wrongAnswerSoundEffect();
 		}
 	};
 
+	const wrongAnswerSoundEffect = () => {
+		document.getElementById('wrong-answer').play();
+	};
+
+	const correctAnswerSoundEffect = () => {
+		document.getElementById('correct-answer').play();
+	};
+
 	const showAnswer = item => {
-		return correctAnswer === item ? { backgroundColor: '#458728', pointerEvents:'none' } : { backgroundColor: '#BD2A2A' };
+		return correctAnswer === item
+			? { backgroundColor: '#458728', pointerEvents: 'none' }
+			: { backgroundColor: '#BD2A2A', pointerEvents: 'none' };
 	};
 
 	return (
