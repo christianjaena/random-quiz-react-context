@@ -4,9 +4,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import ChoicesWrapper from '../../styled-components/ChoicesWrapper.styledcomponent';
 
 // Context Imports
-import ScoreContext from '../../context/ScoreContext';
-import PercentContext from '../../context/PercentContext';
-
+import {STATE} from '../../provider/Context.provider'
 // Utility Imports
 import _ from 'lodash';
 import he from 'he';
@@ -15,8 +13,7 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 	const [isAnswersShown, setAnswersShown] = useState(false);
 	const [choices, setChoices] = useState([]);
 
-	const percent = useContext(PercentContext);
-	const score = useContext(ScoreContext);
+	const {addPercent, addScore } = useContext(STATE);
 
 	const mapNumsToLetters = {
 		1: 'a',
@@ -31,9 +28,9 @@ const ChoicesComponent = ({ correctAnswer, answers }) => {
 
 	const pickAnswer = (answer, index) => {
 		setAnswersShown(true);
-		percent.addPercent();
+		addPercent();
 		if (answer === correctAnswer) {
-			score.addScore();
+			addScore();
 			correctAnswerSoundEffect();
 		} else {
 			wrongAnswerSoundEffect();

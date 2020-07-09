@@ -3,9 +3,10 @@ import Questions from './components/Questions/Questions.component';
 import ReactAudioPlayer from 'react-audio-player';
 import { Switch, Route } from 'react-router-dom';
 import Milktea from './components/Milktea/Milktea.component';
+import ContextProvider from './provider/Context.provider';
 const App = () => {
 	return (
-		<div>
+		<ContextProvider>
 			<ReactAudioPlayer
 				src='https://www.bensound.com/bensound-music/bensound-thejazzpiano.mp3'
 				autoPlay
@@ -23,7 +24,7 @@ const App = () => {
 				<Route exact path='/react-quiz' component={Questions} />
 				<Route exact path='/react-quiz/YEYMILKTEAA' component={Milktea} />
 			</Switch>
-		</div>
+		</ContextProvider>
 	);
 };
 

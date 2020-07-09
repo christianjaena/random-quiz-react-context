@@ -9,13 +9,12 @@ import ProgressBar from '../../styled-components/ProgressBar.styledcomponent';
 import StyledParticles from '../../styled-components/StyledParticles.styledcomponent';
 
 // Context Imports
-import PercentContext from '../../context/PercentContext';
-
+import {STATE} from '../../provider/Context.provider'
 // Utility Imports
 import he from 'he';
 
 const QuestionComponent = ({ questions }) => {
-	const percent = useContext(PercentContext);
+	const {percent} = useContext(STATE);
 	const colors = [
 		'red',
 		'orange',
@@ -40,7 +39,7 @@ const QuestionComponent = ({ questions }) => {
 	return (
 		<div>
 			<ProgressBar
-				percent={percent.percent}
+				percent={percent}
 				strokeWidth='2'
 				strokeColor='#00BFFF'
 			/>
