@@ -11,7 +11,7 @@ import ScoreContext from '../../context/ScoreContext';
 // Utility Imports
 import { useHistory } from 'react-router-dom';
 
-const Score = ({ fetchQuestionsOnLoad }) => {
+const Score = () => {
 	const percent = useContext(PercentContext);
 	const score = useContext(ScoreContext);
 	const history = useHistory();
@@ -29,8 +29,8 @@ const Score = ({ fetchQuestionsOnLoad }) => {
 			) : (
 				<StyledButton
 					onClick={() => {
-						fetchQuestionsOnLoad();
-						window.location.reload();
+						percent.tryAgain();
+						window.scrollTo({ top: 0, behavior: 'smooth' });
 					}}
 					style={
 						percent.percent === 100

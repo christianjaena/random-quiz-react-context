@@ -11,6 +11,7 @@ import LoaderWrapper from '../../styled-components/LoaderWrapper.styledcomponent
 import ScoreContext from '../../context/ScoreContext';
 import PercentContext from '../../context/PercentContext';
 
+
 const QuestionsComponent = () => {
 	const [questions, setQuestions] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -34,16 +35,24 @@ const QuestionsComponent = () => {
 		setIsLoaded(true);
 	};
 
+	const tryAgain = () => {
+		setQuestions([]);
+		setPercent(0);
+		setScore(0);
+		setIsLoaded(false);
+		fetchQuestionsOnLoad();
+	}
+
 	useEffect(() => {
 		fetchQuestionsOnLoad();
 	}, []);
 
 	return isLoaded ? (
 		<div>
-			<PercentContext.Provider value={{ percent, addPercent }}>
+			<PercentContext.Provider value={{ percent, addPercent, tryAgain }}>
 				<ScoreContext.Provider value={{ score, addScore }}>
 					<Question questions={questions} />
-					<Score fetchQuestionsOnLoad={fetchQuestionsOnLoad} />
+					<Score/>
 				</ScoreContext.Provider>
 			</PercentContext.Provider>
 		</div>
