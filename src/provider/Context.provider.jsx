@@ -13,7 +13,7 @@ export const STATE = createContext({
 const ContextProvider = ({ children }) => {
 	const [questions, setQuestions] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [score, setScore] = useState(6);
+	const [score, setScore] = useState(0);
 	const [percent, setPercent] = useState(0);
 
 	const addPercent = () => {
